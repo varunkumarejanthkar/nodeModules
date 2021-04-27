@@ -106,7 +106,7 @@ class Create extends Component{
         }
 
     render(){
-        if(!cookie.load('cookie')){
+        if(!sessionStorage.getItem("user")){
             this.props.history.push("/login");           
         }
         return(

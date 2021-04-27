@@ -156,9 +156,7 @@ class AccountClass extends Component {
     //console.log(store.getState());
     console.log(sessionStorage.getItem("user"));
     //this.state.user = JSON.parse(sessionStorage.getItem("user"));
-    this.setState({
-      user: JSON.parse(sessionStorage.getItem("user"))
-    });
+    this.state.user = JSON.parse(sessionStorage.getItem("user"));    
     //this.state.setState('user', JSON.parse(sessionStorage.getItem("user")));
     //this.state.user.UserName = "varun";
     //console.log(store.getState().user.UserName + " : " + this.state.user.UserName);
@@ -196,7 +194,7 @@ class AccountClass extends Component {
     //if not logged in go to login page
     let redirectVar = null;
     console.log("Outside if block cookie.load cookie");
-    if (!cookie.load("cookie")) {
+    if (!sessionStorage.getItem("user")) {
       console.log("Inside if block cookie.load cookie");
       redirectVar = <Redirect to="/landing" />;
     }

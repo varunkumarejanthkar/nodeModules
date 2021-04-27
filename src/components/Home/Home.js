@@ -41,22 +41,18 @@ class HomeClass extends Component {
         .then((response) => {
             console.log("respones from GetAllExpensesDetails");
             console.log(response.data);      
-            this.setState({
-                allExpenseDetails: response.data
-            });    
+            this.state.allExpenseDetails = response.data;            
             axios.get(url + '/GetGroupInvitationDetails?UserId=' + this.state.user.UserId)
             .then((response) => {    
-                this.setState({
-                    allGroupInvitationDetails: response.data
-                })
+                this.state.allGroupInvitationDetails = response.data;
+                
 
                 console.log(this.state.allGroupInvitationDetails);
 
                 axios.get(url + '/GetAllGroupsDetails?UserId=' + this.state.user.UserId)
                 .then((response) => {             
-                    this.setState({
-                        allGroupDetails: response.data
-                    })
+                    this.state.allGroupDetails = response.data;
+                    
     
                     //this.props.groupsAction(response.data[0]);
 
@@ -64,9 +60,8 @@ class HomeClass extends Component {
                     
                     axios.get(url + '/createNewGroup')
                     .then((response) => {             
-                        this.setState({
-                            allUserDetails: response.data
-                        })
+                        this.state.allUserDetails = response.data;
+                        
     
                         console.log(this.state.allUserDetails);  
                         this.renderDashboard();                  
@@ -285,7 +280,7 @@ class HomeClass extends Component {
         //iterate over books to create a table row        
         //if not logged in go to login page
         let redirectVar = null;
-        if(!cookie.load('cookie')){
+        if(!sessionStorage.getItem("user")){
             redirectVar = <Redirect to= "/landing"/>
         }
         return(

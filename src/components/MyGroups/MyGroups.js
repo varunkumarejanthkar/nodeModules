@@ -25,22 +25,19 @@ class MyGroups extends Component {
     .then((response) => {
       console.log("respones from GetAllExpensesDetails");
       console.log(response.data);      
-      this.setState({
-        allExpenseDetails: response.data
-      });    
+      this.state.allExpenseDetails = response.data;
+      
     axios.get(url + '/GetGroupInvitationDetails?UserId=' + this.state.user.UserId)
     .then((response) => {    
-        this.setState({
-            allGroupInvitationDetails: response.data
-        })
+        this.state.allGroupInvitationDetails = response.data;
+        
 
         console.log(this.state.allGroupInvitationDetails);
 
         axios.get(url + '/GetAllGroupsDetails?UserId=' + this.state.user.UserId)
         .then((response) => {             
-            this.setState({
-            allGroupDetails: response.data
-        })
+            this.state.allGroupDetails = response.data;
+        
     
         console.log(this.state.allGroupDetails);
         this.renderGroupsDropDown();
@@ -227,7 +224,7 @@ class MyGroups extends Component {
     //if not logged in go to login page
     let redirectVar = null;
     console.log("Outside if block cookie.load cookie");
-    if (!cookie.load("cookie")) {
+    if (!sessionStorage.getItem("user")) {
       console.log("Inside if block cookie.load cookie");
       redirectVar = <Redirect to="/landing" />;
     }   

@@ -39,7 +39,7 @@ class Navbar extends Component {
     {
         //if Cookie is set render Logout Button
         let navLogin = null, navLeft = null;
-        if(cookie.load('cookie')){
+        if(sessionStorage.getItem("user")){
             //console.log("Able to read cookie");
             navLogin = (               
                 <ul class="nav navbar-nav navbar-right">
@@ -71,8 +71,8 @@ class Navbar extends Component {
             )
         }
         let redirectVar = null;
-        if(cookie.load('cookie')){
-            // redirectVar = <Redirect to="/Home"/>
+        if(sessionStorage.getItem("user")){
+             redirectVar = <Redirect to="/Home"/>
         }
         else{
             redirectVar = <Redirect to="/Landing"/>

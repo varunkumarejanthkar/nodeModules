@@ -23,7 +23,7 @@ class Landing extends Component {
 
   render() {
     let redirectVar = null;
-    if (cookie.load("cookie")) {
+    if (sessionStorage.getItem("user")) {
       console.log("Inside If cookie block in Landing");
       redirectVar = <Redirect to="/home" />;
     }

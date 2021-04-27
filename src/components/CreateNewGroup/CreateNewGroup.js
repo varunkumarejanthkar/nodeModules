@@ -114,9 +114,8 @@ class CreateNewGroup extends Component {
     console.log("Inside Create NewGroup componentDidMount : ");
     //console.log(store.getState());
     console.log(sessionStorage.getItem("user"));
-    this.setState({
-      user : JSON.parse(sessionStorage.getItem("user"))
-    })
+    this.state.user = JSON.parse(sessionStorage.getItem("user"));
+    
     //this.state.user = JSON.parse(sessionStorage.getItem("user")); 
     axios.get(url + '/createNewGroup')
                 .then((response) => {
@@ -124,9 +123,8 @@ class CreateNewGroup extends Component {
                 //update the state with the response data
                 console.log("Inside CreateNewGroup axios.get");
                 console.log(response.data);
-                this.setState({
-                    allUserDetails : response.data
-                });
+                this.state.allUserDetails = response.data;
+                
                 const usersList = [], mailList = [];
 
                 for(const obj of response.data)
@@ -135,10 +133,9 @@ class CreateNewGroup extends Component {
                   mailList.push(obj.Mail);
                 }               
 
-                this.setState({
-                  UsersList : usersList,
-                  MailList : mailList
-              });
+                this.state.UsersList = usersList;
+                this.state.MailList = mailList;
+              
 
               console.log(this.state.UsersList);
               console.log(this.state.MailList);
@@ -300,7 +297,7 @@ class CreateNewGroup extends Component {
 
   render(){
     let redirectVar = null;
-    if(!cookie.load('cookie')){
+    if(!sessionStorage.getItem("user")){
         redirectVar = <Redirect to= "/landing"/>
     }
 
